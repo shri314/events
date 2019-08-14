@@ -1,15 +1,14 @@
 cmake_minimum_required (VERSION 3.5)
 
 add_executable(
-   foo_test
-   ${PROJECT_SOURCE_DIR}/src/foo.cpp
+   basic_test
    main.cpp
-   foo_test.cpp
+   basic_test.cpp
 )
 
 target_link_libraries(
-   foo_test
+   basic_test
    gtest
 )
 
-add_test(fooTest foo_test)
+add_test(basicTest basic_test)
