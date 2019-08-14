@@ -24,6 +24,43 @@ struct daily_t {
    iterator_t end();
 };
 
+/*
+enum class day_t { Sat, Sun, Mon, Tue, Wed, Thu, Fri };
+enum class month_t {
+   jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec
+};
+
+struct month_and_date_t {
+   int date;
+   month_t month;
+};
+
+struct weekly_t {
+   int m_count;
+   std::vector<day_t> m_on_days;
+   bounds_t m_bounds;
+};
+
+struct monthly_by_day_t {
+   int m_count;
+   std::vector<int> m_on_ordinals;
+   day_t on_day;
+   bounds_t m_bounds;
+};
+
+struct monthly_by_dates_t {
+   int m_count;
+   std::vector<int> m_on_dates;
+   bounds_t m_bounds;
+};
+
+struct yearly_t {
+   int m_count;
+   std::vector<month_and_date_t> m_on_month_dates;
+   bounds_t m_bounds;
+};
+*/
+
 /////////////////////
 
 class daily_t::iterator_t {
@@ -102,7 +139,7 @@ struct title_t {
 
 struct schedule_rule_t {
    title_t m_name;
-   daily_t m_repeat;
+   daily_t m_repeat; // FIXME - std::variant< daily_t, yearly_t, ... >
 };
 
 
