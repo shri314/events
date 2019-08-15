@@ -11,25 +11,24 @@ struct daily_t {
    bounds_t m_bounds;
 
    struct iterator_t;
-   iterator_t begin();
-   iterator_t end();
+   iterator_t begin() const;
+   iterator_t end() const;
 };
 
 /////////////////////
 
 class daily_t::iterator_t {
-   daily_t& m_parent;
-
-   date::year_month_day m_current;
-   int m_number = 0;
+   const daily_t& m_parent;
    int m_is_end = false;
+   int m_number = 0;
+   date::year_month_day m_current;
 
    friend class daily_t;
 
-   iterator_t(daily_t& parent, bool is_end)
+   iterator_t(const daily_t& parent, bool is_end)
       : m_parent(parent)
-      , m_current(m_parent.m_bounds.m_begin)
       , m_is_end(is_end)
+      , m_current(m_parent.m_bounds.m_begin)
    {
    }
 
@@ -38,7 +37,7 @@ public:
       if(!m_is_end) {
          auto&& next = date::sys_days{m_current} + date::days{m_parent.m_count};
 
-         if( (std::holds_alternative<int>(m_parent.m_bounds.m_end) && m_number + 1 > std::get<int>(m_parent.m_bounds.m_end) )
+         if( (std::holds_alternative<int>(m_parent.m_bounds.m_end) && m_number + 1 >= std::get<int>(m_parent.m_bounds.m_end) )
          ||  (std::holds_alternative<date::year_month_day>(m_parent.m_bounds.m_end) && next > std::get<date::year_month_day>(m_parent.m_bounds.m_end)   ) )
          {
             m_is_end = true;
@@ -77,11 +76,11 @@ public:
 
 /////////////////////
 
-inline daily_t::iterator_t daily_t::begin() {
+inline daily_t::iterator_t daily_t::begin() const {
    return daily_t::iterator_t{*this, false};
 }
 
-inline daily_t::iterator_t daily_t::end() {
+inline daily_t::iterator_t daily_t::end() const {
    return daily_t::iterator_t{*this, true};
 }
 

@@ -15,12 +15,6 @@ struct month_and_date_t {
    month_t month;
 };
 
-struct weekly_t {
-   int m_count;
-   std::vector<day_t> m_on_days;
-   bounds_t m_bounds;
-};
-
 struct monthly_by_day_t {
    int m_count;
    std::vector<int> m_on_ordinals;
@@ -53,20 +47,52 @@ int main() {
       { "name": "Stand up", "repeat": "1 yearly",  "repeat_on": "2 Jan, 2 Feb", "begins": "date", "ends": "never|date|12" },
    */
 
-   auto r1 = rule_t{
-               title_t{"Stand up"},
-               daily_t{1,
-                  bounds_t{
-                     date::day(29)/date::nov/date::year(2019),
-                     date::day(5)/date::dec/date::year(2019)
-                  }
-               }
-   };
+   {
+      std::cout << "------------------------------------------------------------\n";
+      std::cout << " Every other day from 2019-11-29 until 2019-12-05           \n";
+      std::cout << "------------------------------------------------------------\n";
 
-   int limit = 10;
-   for(auto d : r1.m_repeat) {
-      std::cout << d << "\n";
-      if(limit-- < 0)
-         break;
+      auto r1 = rule_t{
+                  title_t{"Stand up"},
+                  daily_t{2,
+                     bounds_t{
+                        date::day(29)/date::nov/date::year(2019),
+                        date::day(5)/date::dec/date::year(2019)
+                     }
+                  }
+      };
+
+      int limit = 10;
+      for(auto d : r1.m_repeat) {
+         std::cout << d << "\n";
+         if(limit-- < 0)
+            break;
+      }
    }
+
+   {
+      std::cout << "------------------------------------------------------------\n";
+      std::cout << " Every other week on Mon, Tue from 2019-11-29 until 4 times \n";
+      std::cout << "------------------------------------------------------------\n";
+
+      auto r1 = rule1_t{
+                  title_t{"Stand up"},
+                  weekly_t{2,
+                     {date::Monday, date::Tuesday},
+                     bounds_t{
+                        date::day(29)/date::nov/date::year(2019),
+                        4
+                     }
+                  }
+      };
+
+      int limit = 10;
+      for(auto d : r1.m_repeat) {
+         std::cout << d << "\n";
+         if(limit-- < 0)
+            break;
+      }
+   }
+
+   std::cout << "------------------------------------------------------------\n";
 }
