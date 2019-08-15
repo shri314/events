@@ -1,7 +1,6 @@
 #pragma once
 
 #include "bounds.h"
-#include <variant>
 #include <date/date.h>
 
 /////////////////////
@@ -35,15 +34,19 @@ class daily_t::iterator_t {
 
 public:
    iterator_t& operator++() {
-      if(!m_is_end) {
-         if( std::holds_alternative<int>(m_parent.m_bounds.m_end) && m_number + 1 >= std::get<int>(m_parent.m_bounds.m_end) ) {
+      if(!m_is_end)
+      {
+         if( std::holds_alternative<int>(m_parent.m_bounds.m_end) && m_number + 1 >= std::get<int>(m_parent.m_bounds.m_end) )
+         {
             m_is_end = true;
          }
       }
 
-      if(!m_is_end) {
+      if(!m_is_end)
+      {
          auto&& next_base = date::sys_days{m_current_base} + date::days{m_parent.m_count};
          auto&& next_date = next_base;
+
          if( std::holds_alternative<date::year_month_day>(m_parent.m_bounds.m_end) && next_date > std::get<date::year_month_day>(m_parent.m_bounds.m_end) )
          {
             m_is_end = true;
@@ -51,8 +54,12 @@ public:
          else
          {
             m_current_base = std::move(next_base);
-            m_number++;
          }
+      }
+
+      if(!m_is_end)
+      {
+         m_number++;
       }
 
       return *this;

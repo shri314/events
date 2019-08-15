@@ -6,25 +6,11 @@
 
 /*
 enum class day_t { Sat, Sun, Mon, Tue, Wed, Thu, Fri };
-enum class month_t {
-   jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec
-};
-
-struct month_and_date_t {
-   int date;
-   month_t month;
-};
 
 struct monthly_by_day_t {
    int m_count;
    std::vector<int> m_on_ordinals;
    day_t on_day;
-   bounds_t m_bounds;
-};
-
-struct yearly_t {
-   int m_count;
-   std::vector<month_and_date_t> m_on_month_dates;
    bounds_t m_bounds;
 };
 */
@@ -97,6 +83,30 @@ int main() {
                   title_t{"Stand up"},
                   monthly_by_dates_t{2,
                      {date::day{2}, date::day{15}},
+                     bounds_t{
+                        date::day(29)/date::nov/date::year(2019),
+                        4
+                     }
+                  }
+      };
+
+      int limit = 10;
+      for(auto d : r1.m_repeat) {
+         std::cout << d << "\n";
+         if(limit-- < 0)
+            break;
+      }
+   }
+
+   {
+      std::cout << "------------------------------------------------------------\n";
+      std::cout << " Every other year on 26th Jan and 15th Aug from 2019-11-29, until 4 times \n";
+      std::cout << "------------------------------------------------------------\n";
+
+      auto r1 = rule3_t{
+                  title_t{"Stand up"},
+                  yearly_t{2,
+                     {date::jan/date::day{26}, date::aug/date::day{15}},
                      bounds_t{
                         date::day(29)/date::nov/date::year(2019),
                         4

@@ -4,11 +4,13 @@
 #include <vector>
 #include <date/date.h>
 
+#include <iostream> // cout
+
 /////////////////////
 
-struct monthly_by_dates_t {
+struct yearly_t {
    int m_count;
-   std::vector<date::day> m_on_dates;
+   std::vector<date::month_day> m_on_dates;
    bounds_t m_bounds;
 
    struct iterator_t;
@@ -18,18 +20,18 @@ struct monthly_by_dates_t {
 
 /////////////////////
 
-class monthly_by_dates_t::iterator_t {
-   const monthly_by_dates_t& m_parent;
+class yearly_t::iterator_t {
+   const yearly_t& m_parent;
    int m_is_end = false;
    int m_number = 0;
 
-   date::year_month m_current_base;
-   std::vector<date::day> m_offsets;
+   date::year m_current_base;
+   std::vector<date::month_day> m_offsets;
    decltype(m_offsets)::size_type m_offset_index = 0;
 
-   friend class monthly_by_dates_t;
+   friend class yearly_t;
 
-   iterator_t(const monthly_by_dates_t& parent, bool is_end)
+   iterator_t(const yearly_t& parent, bool is_end)
       : m_parent(parent)
       , m_is_end(is_end)
    {
@@ -44,18 +46,18 @@ class monthly_by_dates_t::iterator_t {
             offsets.erase( std::unique( offsets.begin(), offsets.end() ), offsets.end() );
 
             if(offsets.empty())
-               offsets.emplace_back( start.day() );
+               offsets.emplace_back( date::month_day{start.month(), start.day()} );
 
             return offsets;
          }();
 
-         auto p = std::lower_bound( m_offsets.begin(), m_offsets.end(), start.day() );
+         auto p = std::lower_bound( m_offsets.begin(), m_offsets.end(), date::month_day{start.month(), start.day()} );
          if(p != m_offsets.end()) {
-            m_current_base = date::year_month{start.year(), start.month()};
+            m_current_base = start.year();
             m_offset_index = std::distance(m_offsets.begin(), p);
          }
          else {
-            m_current_base = date::year_month{start.year(), start.month()} + date::months{1};
+            m_current_base = start.year() + date::years{1};
             m_offset_index = 0;
          }
       }
@@ -76,8 +78,8 @@ public:
          m_offset_index++;
          if(m_offset_index < m_offsets.size())
          {
-            auto&& next_date = m_current_base / date::day{m_offsets[m_offset_index]};
-            if(!next_date.ok()) next_date = m_current_base / date::last;
+            auto&& next_date = m_current_base / date::month_day{m_offsets[m_offset_index]};
+            if(!next_date.ok()) next_date = m_current_base / m_offsets[m_offset_index].month() / date::last;
 
             if( (std::holds_alternative<date::year_month_day>(m_parent.m_bounds.m_end) && next_date > std::get<date::year_month_day>(m_parent.m_bounds.m_end) ) )
             {
@@ -88,9 +90,9 @@ public:
          {
             m_offset_index = 0;
 
-            auto&& next_base = m_current_base + date::months{m_parent.m_count};
-            auto&& next_date = next_base / date::day{m_offsets[m_offset_index]};
-            if(!next_date.ok()) next_date = next_base / date::last;
+            auto&& next_base = m_current_base + date::years{m_parent.m_count};
+            auto&& next_date = next_base / date::month_day{m_offsets[m_offset_index]};
+            if(!next_date.ok()) next_date = next_base / m_offsets[m_offset_index].month() / date::last;
 
             if( std::holds_alternative<date::year_month_day>(m_parent.m_bounds.m_end) && next_date > std::get<date::year_month_day>(m_parent.m_bounds.m_end) )
             {
@@ -112,13 +114,13 @@ public:
    }
 
    date::year_month_day operator*() const {
-      auto d = m_current_base / date::day{ m_offsets[m_offset_index] };
-      return d.ok() ? d : m_current_base / date::last;
+      auto d = m_current_base / date::month_day{ m_offsets[m_offset_index] };
+      return d.ok() ? d : m_current_base / m_offsets[m_offset_index].month() / date::last;
    }
 
    date::year_month_day operator*() {
-      auto d = m_current_base / date::day{ m_offsets[m_offset_index] };
-      return d.ok() ? d : m_current_base / date::last;
+      auto d = m_current_base / date::month_day{ m_offsets[m_offset_index] };
+      return d.ok() ? d : m_current_base / m_offsets[m_offset_index].month() / date::last;
    }
 
    bool operator==(const iterator_t& other) const {
@@ -138,12 +140,12 @@ public:
 
 /////////////////////
 
-inline monthly_by_dates_t::iterator_t monthly_by_dates_t::begin() const {
-   return monthly_by_dates_t::iterator_t{*this, false};
+inline yearly_t::iterator_t yearly_t::begin() const {
+   return yearly_t::iterator_t{*this, false};
 }
 
-inline monthly_by_dates_t::iterator_t monthly_by_dates_t::end() const {
-   return monthly_by_dates_t::iterator_t{*this, true};
+inline yearly_t::iterator_t yearly_t::end() const {
+   return yearly_t::iterator_t{*this, true};
 }
 
 /////////////////////

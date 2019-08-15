@@ -1,7 +1,6 @@
 #pragma once
 
 #include "bounds.h"
-#include <variant>
 #include <vector>
 #include <date/date.h>
 
@@ -73,14 +72,16 @@ class weekly_t::iterator_t {
 
 public:
    iterator_t& operator++() {
-      if(!m_is_end) {
+      if(!m_is_end)
+      {
          if( std::holds_alternative<int>(m_parent.m_bounds.m_end) && m_number + 1 >= std::get<int>(m_parent.m_bounds.m_end) )
          {
             m_is_end = true;
          }
       }
 
-      if(!m_is_end) {
+      if(!m_is_end)
+      {
          m_offset_index++;
          if(m_offset_index < m_offsets.size())
          {
@@ -96,15 +97,20 @@ public:
 
             auto&& next_base = date::sys_days{m_current_base} + date::weeks{m_parent.m_count};
             auto&& next_date = next_base + date::days{ m_offsets[m_offset_index] };
+
             if( (std::holds_alternative<date::year_month_day>(m_parent.m_bounds.m_end) && next_date > std::get<date::year_month_day>(m_parent.m_bounds.m_end) ) )
             {
                m_is_end = true;
             }
-            else {
+            else
+            {
                m_current_base = std::move(next_base);
             }
          }
+      }
 
+      if(!m_is_end)
+      {
          m_number++;
       }
 

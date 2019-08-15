@@ -3,6 +3,8 @@
 #include "daily.h"
 #include "weekly.h"
 #include "monthly_by_dates.h"
+#include "yearly.h"
+
 #include <string>
 
 /////////////////////
@@ -26,6 +28,11 @@ struct rule1_t {
 struct rule2_t {
    title_t m_name;
    monthly_by_dates_t m_repeat;
+};
+
+struct rule3_t {
+   title_t m_name;
+   yearly_t m_repeat;
 };
 
 /////////////////////
