@@ -22,12 +22,6 @@ struct monthly_by_day_t {
    bounds_t m_bounds;
 };
 
-struct monthly_by_dates_t {
-   int m_count;
-   std::vector<int> m_on_dates;
-   bounds_t m_bounds;
-};
-
 struct yearly_t {
    int m_count;
    std::vector<month_and_date_t> m_on_month_dates;
@@ -49,7 +43,7 @@ int main() {
 
    {
       std::cout << "------------------------------------------------------------\n";
-      std::cout << " Every other day from 2019-11-29 until 2019-12-05           \n";
+      std::cout << " Every other day from 2019-11-29, until 2019-12-05          \n";
       std::cout << "------------------------------------------------------------\n";
 
       auto r1 = rule_t{
@@ -72,13 +66,37 @@ int main() {
 
    {
       std::cout << "------------------------------------------------------------\n";
-      std::cout << " Every other week on Mon, Tue from 2019-11-29 until 4 times \n";
+      std::cout << " Every other week on Mon, Tue from 2019-11-29, until 4 times \n";
       std::cout << "------------------------------------------------------------\n";
 
       auto r1 = rule1_t{
                   title_t{"Stand up"},
                   weekly_t{2,
                      {date::Monday, date::Tuesday},
+                     bounds_t{
+                        date::day(29)/date::nov/date::year(2019),
+                        4
+                     }
+                  }
+      };
+
+      int limit = 10;
+      for(auto d : r1.m_repeat) {
+         std::cout << d << "\n";
+         if(limit-- < 0)
+            break;
+      }
+   }
+
+   {
+      std::cout << "------------------------------------------------------------\n";
+      std::cout << " Every other month on 2nd and 15th from 2019-11-29, until 4 times \n";
+      std::cout << "------------------------------------------------------------\n";
+
+      auto r1 = rule2_t{
+                  title_t{"Stand up"},
+                  monthly_by_dates_t{2,
+                     {date::day{2}, date::day{15}},
                      bounds_t{
                         date::day(29)/date::nov/date::year(2019),
                         4

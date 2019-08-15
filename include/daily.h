@@ -21,30 +21,36 @@ class daily_t::iterator_t {
    const daily_t& m_parent;
    int m_is_end = false;
    int m_number = 0;
-   date::year_month_day m_current;
+
+   date::year_month_day m_current_base;
 
    friend class daily_t;
 
    iterator_t(const daily_t& parent, bool is_end)
       : m_parent(parent)
       , m_is_end(is_end)
-      , m_current(m_parent.m_bounds.m_begin)
+      , m_current_base(m_parent.m_bounds.m_begin)
    {
    }
 
 public:
    iterator_t& operator++() {
       if(!m_is_end) {
-         auto&& next = date::sys_days{m_current} + date::days{m_parent.m_count};
+         if( std::holds_alternative<int>(m_parent.m_bounds.m_end) && m_number + 1 >= std::get<int>(m_parent.m_bounds.m_end) ) {
+            m_is_end = true;
+         }
+      }
 
-         if( (std::holds_alternative<int>(m_parent.m_bounds.m_end) && m_number + 1 >= std::get<int>(m_parent.m_bounds.m_end) )
-         ||  (std::holds_alternative<date::year_month_day>(m_parent.m_bounds.m_end) && next > std::get<date::year_month_day>(m_parent.m_bounds.m_end)   ) )
+      if(!m_is_end) {
+         auto&& next_base = date::sys_days{m_current_base} + date::days{m_parent.m_count};
+         auto&& next_date = next_base;
+         if( std::holds_alternative<date::year_month_day>(m_parent.m_bounds.m_end) && next_date > std::get<date::year_month_day>(m_parent.m_bounds.m_end) )
          {
             m_is_end = true;
          }
          else
          {
-            m_current = std::move(next);
+            m_current_base = std::move(next_base);
             m_number++;
          }
       }
@@ -53,11 +59,11 @@ public:
    }
 
    date::year_month_day operator*() const {
-      return m_current;
+      return m_current_base;
    }
 
    date::year_month_day operator*() {
-      return m_current;
+      return m_current_base;
    }
 
    bool operator==(const iterator_t& other) const {
@@ -66,7 +72,7 @@ public:
          return m_is_end == other.m_is_end;
 
       return m_number == other.m_number
-         && m_current == other.m_current;
+         && m_current_base == other.m_current_base;
    }
 
    bool operator!=(const iterator_t& other) const {
