@@ -3,18 +3,6 @@
 #include <date/date.h>
 #include <iostream>
 
-
-/*
-enum class day_t { Sat, Sun, Mon, Tue, Wed, Thu, Fri };
-
-struct monthly_by_day_t {
-   int m_count;
-   std::vector<int> m_on_ordinals;
-   day_t on_day;
-   bounds_t m_bounds;
-};
-*/
-
 /////////////////////
 
 int main() {
@@ -107,6 +95,30 @@ int main() {
                   title_t{"Stand up"},
                   yearly_t{2,
                      {date::jan/date::day{26}, date::aug/date::day{15}},
+                     bounds_t{
+                        date::day(29)/date::nov/date::year(2019),
+                        4
+                     }
+                  }
+      };
+
+      int limit = 10;
+      for(auto d : r1.m_repeat) {
+         std::cout << d << "\n";
+         if(limit-- < 0)
+            break;
+      }
+   }
+
+   {
+      std::cout << "------------------------------------------------------------\n";
+      std::cout << " Every other month on 1st friday from 2019-11-29, until 4 times \n";
+      std::cout << "------------------------------------------------------------\n";
+
+      auto r1 = rule4_t{
+                  title_t{"Stand up"},
+                  monthly_by_weekday_t{2,
+                     date::Friday[1],
                      bounds_t{
                         date::day(29)/date::nov/date::year(2019),
                         4
