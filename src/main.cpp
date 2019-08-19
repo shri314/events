@@ -21,7 +21,7 @@ int main() {
       std::cout << "------------------------------------------------------------\n";
 
       auto r1 = rule_t{
-                  title_t{"Stand up"},
+                  title_t{"foo"},
                   daily_t{2,
                      bounds_t{
                         date::day(29)/date::nov/date::year(2019),
@@ -44,7 +44,7 @@ int main() {
       std::cout << "------------------------------------------------------------\n";
 
       auto r1 = rule1_t{
-                  title_t{"Stand up"},
+                  title_t{"foo"},
                   weekly_t{2,
                      {date::Monday, date::Tuesday},
                      bounds_t{
@@ -68,7 +68,7 @@ int main() {
       std::cout << "------------------------------------------------------------\n";
 
       auto r1 = rule2_t{
-                  title_t{"Stand up"},
+                  title_t{"foo"},
                   monthly_by_dates_t{2,
                      {date::day{2}, date::day{15}},
                      bounds_t{
@@ -92,7 +92,7 @@ int main() {
       std::cout << "------------------------------------------------------------\n";
 
       auto r1 = rule3_t{
-                  title_t{"Stand up"},
+                  title_t{"foo"},
                   yearly_t{2,
                      {date::jan/date::day{26}, date::aug/date::day{15}},
                      bounds_t{
@@ -116,7 +116,7 @@ int main() {
       std::cout << "------------------------------------------------------------\n";
 
       auto r1 = rule4_t{
-                  title_t{"Stand up"},
+                  title_t{"foo"},
                   monthly_by_weekday_t{2,
                      date::Friday[1],
                      bounds_t{

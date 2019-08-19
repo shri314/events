@@ -17,7 +17,7 @@ TEST(weekly_rule, every_week) {
 
    {
       auto r1 = rule1_t{
-                  title_t{"Stand up every third day"},
+                  title_t{"foo"},
                   weekly_t{1,
                      {},
                      bounds_t{
@@ -32,7 +32,7 @@ TEST(weekly_rule, every_week) {
 
    {
       auto r1 = rule1_t{
-                  title_t{"Stand up every third day"},
+                  title_t{"foo"},
                   weekly_t{1,
                      {},
                      bounds_t{
@@ -47,7 +47,7 @@ TEST(weekly_rule, every_week) {
 
    {
       auto r1 = rule1_t{
-                  title_t{"Stand up every third day"},
+                  title_t{"foo"},
                   weekly_t{1,
                      {},
                      bounds_t{
@@ -72,7 +72,7 @@ TEST(weekly_rule, every_third_week) {
 
    {
       auto r1 = rule1_t{
-                  title_t{"Stand up every third day"},
+                  title_t{"foo"},
                   weekly_t{3,
                      {},
                      bounds_t{
@@ -87,7 +87,7 @@ TEST(weekly_rule, every_third_week) {
 
    {
       auto r1 = rule1_t{
-                  title_t{"Stand up every third day"},
+                  title_t{"foo"},
                   weekly_t{3,
                      {},
                      bounds_t{
@@ -102,7 +102,7 @@ TEST(weekly_rule, every_third_week) {
 
    {
       auto r1 = rule1_t{
-                  title_t{"Stand up every third day"},
+                  title_t{"foo"},
                   weekly_t{3,
                      {},
                      bounds_t{
@@ -130,7 +130,7 @@ TEST(weekly_rule, every_week_on_these_days) {
 
    {
       auto r1 = rule1_t{
-                  title_t{"Stand up every third day"},
+                  title_t{"foo"},
                   weekly_t{1,
                      {date::Friday, date::Tuesday},
                      bounds_t{
@@ -145,7 +145,7 @@ TEST(weekly_rule, every_week_on_these_days) {
 
    {
       auto r1 = rule1_t{
-                  title_t{"Stand up every third day"},
+                  title_t{"foo"},
                   weekly_t{1,
                      {date::Tuesday, date::Friday},
                      bounds_t{
@@ -160,7 +160,7 @@ TEST(weekly_rule, every_week_on_these_days) {
 
    {
       auto r1 = rule1_t{
-                  title_t{"Stand up every third day"},
+                  title_t{"foo"},
                   weekly_t{1,
                      {date::Friday, date::Tuesday},
                      bounds_t{
@@ -188,7 +188,7 @@ TEST(weekly_rule, every_third_week_on_these_days) {
 
    {
       auto r1 = rule1_t{
-                  title_t{"Stand up every third day"},
+                  title_t{"foo"},
                   weekly_t{3,
                      {date::Friday, date::Tuesday},
                      bounds_t{
@@ -203,7 +203,7 @@ TEST(weekly_rule, every_third_week_on_these_days) {
 
    {
       auto r1 = rule1_t{
-                  title_t{"Stand up every third day"},
+                  title_t{"foo"},
                   weekly_t{3,
                      {date::Tuesday, date::Friday},
                      bounds_t{
@@ -218,7 +218,7 @@ TEST(weekly_rule, every_third_week_on_these_days) {
 
    {
       auto r1 = rule1_t{
-                  title_t{"Stand up every third day"},
+                  title_t{"foo"},
                   weekly_t{3,
                      {date::Friday, date::Tuesday},
                      bounds_t{

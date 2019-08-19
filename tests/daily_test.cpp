@@ -19,7 +19,7 @@ TEST(daily_rule, every_day) {
 
    {
       auto r1 = rule_t{
-                  title_t{"Stand up"},
+                  title_t{"foo"},
                   daily_t{1,
                      bounds_t{
                         date::day(29)/date::dec/date::year(2019),
@@ -33,7 +33,7 @@ TEST(daily_rule, every_day) {
 
    {
       auto r1 = rule_t{
-                  title_t{"Stand up"},
+                  title_t{"foo"},
                   daily_t{1,
                      bounds_t{
                         date::day(29)/date::dec/date::year(2019),
@@ -57,7 +57,7 @@ TEST(daily_rule, every_third_day) {
 
    {
       auto r1 = rule_t{
-                  title_t{"Stand up every third day"},
+                  title_t{"foo"},
                   daily_t{3,
                      bounds_t{
                         date::day(30)/date::dec/date::year(2019),
@@ -71,7 +71,7 @@ TEST(daily_rule, every_third_day) {
 
    {
       auto r1 = rule_t{
-                  title_t{"Stand up"},
+                  title_t{"foo"},
                   daily_t{3,
                      bounds_t{
                         date::day(30)/date::dec/date::year(2019),
