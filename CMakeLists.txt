@@ -25,6 +25,17 @@ ExternalProject_Add(
       -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_SOURCE_DIR}/3rdpty/date
 )
 
+ExternalProject_Add(
+   Json
+   URL "https://github.com/nlohmann/json/archive/v3.7.0.tar.gz"
+   URL_MD5 "4755f892ee7770ecee31296b29d43fef"
+   CMAKE_GENERATOR ${gen}
+   CMAKE_ARGS
+      -DCMAKE_CXX_STANDARD:STRING=17
+      -DBUILD_SHARED_LIBS:BOOL=ON
+      -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_SOURCE_DIR}/3rdpty/json
+)
+
 ###################################
 
 project(foo-example LANGUAGES CXX)

@@ -2,4 +2,4 @@
 
 export MAKE_PRG_="${1-make}"
 
-watch --color -n3 '( "${MAKE_PRG_}" -s -C build/ && "${MAKE_PRG_}" CTEST_OUTPUT_ON_FAILURE=1 -s -C build/ check && ./build/src/events-demo )2>&1'
+watch --color -n3 '( cd "$(git rev-parse --show-toplevel)" && "${MAKE_PRG_}" -s -C build/ && "${MAKE_PRG_}" CTEST_OUTPUT_ON_FAILURE=1 -s -C build/ check && ./build/src/events-demo )2>&1'
