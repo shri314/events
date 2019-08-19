@@ -16,7 +16,7 @@ TEST(monthly_by_dates_rule, every_month_middle) {
    };
 
    {
-      auto r1 = rule2_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_dates_t{1,
                      {},
@@ -31,7 +31,7 @@ TEST(monthly_by_dates_rule, every_month_middle) {
    }
 
    {
-      auto r1 = rule2_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_dates_t{1,
                      {},
@@ -46,7 +46,7 @@ TEST(monthly_by_dates_rule, every_month_middle) {
    }
 
    {
-      auto r1 = rule2_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_dates_t{1,
                      {},
@@ -71,7 +71,7 @@ TEST(monthly_by_dates_rule, every_three_months_middle) {
    };
 
    {
-      auto r1 = rule2_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_dates_t{3,
                      {},
@@ -86,7 +86,7 @@ TEST(monthly_by_dates_rule, every_three_months_middle) {
    }
 
    {
-      auto r1 = rule2_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_dates_t{3,
                      {},
@@ -101,7 +101,7 @@ TEST(monthly_by_dates_rule, every_three_months_middle) {
    }
 
    {
-      auto r1 = rule2_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_dates_t{3,
                      {},
@@ -128,7 +128,7 @@ TEST(monthly_by_dates_rule, every_month_corner) {
    };
 
    {
-      auto r1 = rule2_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_dates_t{1,
                      {},
@@ -143,7 +143,7 @@ TEST(monthly_by_dates_rule, every_month_corner) {
    }
 
    {
-      auto r1 = rule2_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_dates_t{1,
                      {},
@@ -158,7 +158,7 @@ TEST(monthly_by_dates_rule, every_month_corner) {
    }
 
    {
-      auto r1 = rule2_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_dates_t{1,
                      {},
@@ -185,7 +185,7 @@ TEST(monthly_by_dates_rule, every_three_months_corner) {
    };
 
    {
-      auto r1 = rule2_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_dates_t{3,
                      {},
@@ -200,7 +200,7 @@ TEST(monthly_by_dates_rule, every_three_months_corner) {
    }
 
    {
-      auto r1 = rule2_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_dates_t{3,
                      {},
@@ -215,7 +215,7 @@ TEST(monthly_by_dates_rule, every_three_months_corner) {
    }
 
    {
-      auto r1 = rule2_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_dates_t{3,
                      {},
@@ -246,7 +246,7 @@ TEST(monthly_by_dates_rule, every_month_on_these_days) {
    };
 
    {
-      auto r1 = rule2_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_dates_t{1,
                      {date::day{15}, date::day{20}, date::day{31}},
@@ -261,7 +261,7 @@ TEST(monthly_by_dates_rule, every_month_on_these_days) {
    }
 
    {
-      auto r1 = rule2_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_dates_t{1,
                      {date::day{20}, date::day{31}, date::day{15}}, // different order
@@ -276,7 +276,7 @@ TEST(monthly_by_dates_rule, every_month_on_these_days) {
    }
 
    {
-      auto r1 = rule2_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_dates_t{1,
                      {date::day{15}, date::day{20}, date::day{31}},
@@ -307,7 +307,7 @@ TEST(monthly_by_dates_rule, every_three_month_on_these_days) {
    };
 
    {
-      auto r1 = rule2_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_dates_t{3,
                      {date::day{15}, date::day{20}, date::day{31}},
@@ -322,7 +322,7 @@ TEST(monthly_by_dates_rule, every_three_month_on_these_days) {
    }
 
    {
-      auto r1 = rule2_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_dates_t{3,
                      {date::day{20}, date::day{31}, date::day{15}}, // different order
@@ -337,7 +337,7 @@ TEST(monthly_by_dates_rule, every_three_month_on_these_days) {
    }
 
    {
-      auto r1 = rule2_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_dates_t{3,
                      {date::day{15}, date::day{20}, date::day{31}},
@@ -365,7 +365,7 @@ TEST(monthly_by_dates_rule, every_month_on_these_days_from_next_month) {
    };
 
    {
-      auto r1 = rule2_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_dates_t{1,
                      {date::day{15}, date::day{20}},
@@ -380,7 +380,7 @@ TEST(monthly_by_dates_rule, every_month_on_these_days_from_next_month) {
    }
 
    {
-      auto r1 = rule2_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_dates_t{1,
                      {date::day{20}, date::day{15}}, // different order
@@ -395,7 +395,7 @@ TEST(monthly_by_dates_rule, every_month_on_these_days_from_next_month) {
    }
 
    {
-      auto r1 = rule2_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_dates_t{1,
                      {date::day{15}, date::day{20}},
@@ -423,7 +423,7 @@ TEST(monthly_by_dates_rule, every_three_month_on_these_days_from_next_month) {
    };
 
    {
-      auto r1 = rule2_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_dates_t{3,
                      {date::day{15}, date::day{20}},
@@ -438,7 +438,7 @@ TEST(monthly_by_dates_rule, every_three_month_on_these_days_from_next_month) {
    }
 
    {
-      auto r1 = rule2_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_dates_t{3,
                      {date::day{20}, date::day{15}}, // different order
@@ -453,7 +453,7 @@ TEST(monthly_by_dates_rule, every_three_month_on_these_days_from_next_month) {
    }
 
    {
-      auto r1 = rule2_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_dates_t{3,
                      {date::day{15}, date::day{20}},

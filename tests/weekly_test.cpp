@@ -16,7 +16,7 @@ TEST(weekly_rule, every_week) {
    };
 
    {
-      auto r1 = rule1_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   weekly_t{1,
                      {},
@@ -31,7 +31,7 @@ TEST(weekly_rule, every_week) {
    }
 
    {
-      auto r1 = rule1_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   weekly_t{1,
                      {},
@@ -46,7 +46,7 @@ TEST(weekly_rule, every_week) {
    }
 
    {
-      auto r1 = rule1_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   weekly_t{1,
                      {},
@@ -71,7 +71,7 @@ TEST(weekly_rule, every_third_week) {
    };
 
    {
-      auto r1 = rule1_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   weekly_t{3,
                      {},
@@ -86,7 +86,7 @@ TEST(weekly_rule, every_third_week) {
    }
 
    {
-      auto r1 = rule1_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   weekly_t{3,
                      {},
@@ -101,7 +101,7 @@ TEST(weekly_rule, every_third_week) {
    }
 
    {
-      auto r1 = rule1_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   weekly_t{3,
                      {},
@@ -129,7 +129,7 @@ TEST(weekly_rule, every_week_on_these_days) {
    };
 
    {
-      auto r1 = rule1_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   weekly_t{1,
                      {date::Friday, date::Tuesday},
@@ -144,7 +144,7 @@ TEST(weekly_rule, every_week_on_these_days) {
    }
 
    {
-      auto r1 = rule1_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   weekly_t{1,
                      {date::Tuesday, date::Friday},
@@ -159,7 +159,7 @@ TEST(weekly_rule, every_week_on_these_days) {
    }
 
    {
-      auto r1 = rule1_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   weekly_t{1,
                      {date::Friday, date::Tuesday},
@@ -187,7 +187,7 @@ TEST(weekly_rule, every_third_week_on_these_days) {
    };
 
    {
-      auto r1 = rule1_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   weekly_t{3,
                      {date::Friday, date::Tuesday},
@@ -202,7 +202,7 @@ TEST(weekly_rule, every_third_week_on_these_days) {
    }
 
    {
-      auto r1 = rule1_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   weekly_t{3,
                      {date::Tuesday, date::Friday},
@@ -217,7 +217,7 @@ TEST(weekly_rule, every_third_week_on_these_days) {
    }
 
    {
-      auto r1 = rule1_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   weekly_t{3,
                      {date::Friday, date::Tuesday},

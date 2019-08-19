@@ -16,7 +16,7 @@ TEST(yearly_rule, every_year) {
    };
 
    {
-      auto r1 = rule3_t{
+      auto r1 = rule_t{
                   title_t{"Stand up every third day"},
                   yearly_t{1,
                      {},
@@ -31,7 +31,7 @@ TEST(yearly_rule, every_year) {
    }
 
    {
-      auto r1 = rule3_t{
+      auto r1 = rule_t{
                   title_t{"Stand up every third day"},
                   yearly_t{1,
                      {},
@@ -46,7 +46,7 @@ TEST(yearly_rule, every_year) {
    }
 
    {
-      auto r1 = rule3_t{
+      auto r1 = rule_t{
                   title_t{"Stand up every third day"},
                   yearly_t{1,
                      {},
@@ -71,7 +71,7 @@ TEST(yearly_rule, every_three_years) {
    };
 
    {
-      auto r1 = rule3_t{
+      auto r1 = rule_t{
                   title_t{"Stand up every third day"},
                   yearly_t{3,
                      {},
@@ -86,7 +86,7 @@ TEST(yearly_rule, every_three_years) {
    }
 
    {
-      auto r1 = rule3_t{
+      auto r1 = rule_t{
                   title_t{"Stand up every third day"},
                   yearly_t{3,
                      {},
@@ -101,7 +101,7 @@ TEST(yearly_rule, every_three_years) {
    }
 
    {
-      auto r1 = rule3_t{
+      auto r1 = rule_t{
                   title_t{"Stand up every third day"},
                   yearly_t{3,
                      {},
@@ -128,7 +128,7 @@ TEST(yearly_rule, every_year_corner) {
    };
 
    {
-      auto r1 = rule3_t{
+      auto r1 = rule_t{
                   title_t{"Stand up every third day"},
                   yearly_t{1,
                      {},
@@ -143,7 +143,7 @@ TEST(yearly_rule, every_year_corner) {
    }
 
    {
-      auto r1 = rule3_t{
+      auto r1 = rule_t{
                   title_t{"Stand up every third day"},
                   yearly_t{1,
                      {},
@@ -158,7 +158,7 @@ TEST(yearly_rule, every_year_corner) {
    }
 
    {
-      auto r1 = rule3_t{
+      auto r1 = rule_t{
                   title_t{"Stand up every third day"},
                   yearly_t{1,
                      {},
@@ -185,7 +185,7 @@ TEST(yearly_rule, every_three_years_corner) {
    };
 
    {
-      auto r1 = rule3_t{
+      auto r1 = rule_t{
                   title_t{"Stand up every third day"},
                   yearly_t{3,
                      {},
@@ -200,7 +200,7 @@ TEST(yearly_rule, every_three_years_corner) {
    }
 
    {
-      auto r1 = rule3_t{
+      auto r1 = rule_t{
                   title_t{"Stand up every third day"},
                   yearly_t{3,
                      {},
@@ -215,7 +215,7 @@ TEST(yearly_rule, every_three_years_corner) {
    }
 
    {
-      auto r1 = rule3_t{
+      auto r1 = rule_t{
                   title_t{"Stand up every third day"},
                   yearly_t{3,
                      {},
@@ -246,7 +246,7 @@ TEST(yearly_by_dates_rule, every_year_on_these_days) {
    };
 
    {
-      auto r1 = rule3_t{
+      auto r1 = rule_t{
                   title_t{"Stand up every third day"},
                   yearly_t{1,
                      {date::jan/date::day{15}, date::mar/date::day{20}, date::jul/date::day{31}},
@@ -261,7 +261,7 @@ TEST(yearly_by_dates_rule, every_year_on_these_days) {
    }
 
    {
-      auto r1 = rule3_t{
+      auto r1 = rule_t{
                   title_t{"Stand up every third day"},
                   yearly_t{1,
                      {date::mar/date::day{20}, date::jul/date::day{31}, date::jan/date::day{15}}, // different order
@@ -276,7 +276,7 @@ TEST(yearly_by_dates_rule, every_year_on_these_days) {
    }
 
    {
-      auto r1 = rule3_t{
+      auto r1 = rule_t{
                   title_t{"Stand up every third day"},
                   yearly_t{1,
                      {date::jan/date::day{15}, date::mar/date::day{20}, date::jul/date::day{31}},
@@ -307,7 +307,7 @@ TEST(yearly_by_dates_rule, every_three_years_on_these_days) {
    };
 
    {
-      auto r1 = rule3_t{
+      auto r1 = rule_t{
                   title_t{"Stand up every third day"},
                   yearly_t{3,
                      {date::jan/date::day{15}, date::mar/date::day{20}, date::jul/date::day{31}},
@@ -322,7 +322,7 @@ TEST(yearly_by_dates_rule, every_three_years_on_these_days) {
    }
 
    {
-      auto r1 = rule3_t{
+      auto r1 = rule_t{
                   title_t{"Stand up every third day"},
                   yearly_t{3,
                      {date::mar/date::day{20}, date::jul/date::day{31}, date::jan/date::day{15}}, // different order
@@ -337,7 +337,7 @@ TEST(yearly_by_dates_rule, every_three_years_on_these_days) {
    }
 
    {
-      auto r1 = rule3_t{
+      auto r1 = rule_t{
                   title_t{"Stand up every third day"},
                   yearly_t{3,
                      {date::jan/date::day{15}, date::mar/date::day{20}, date::jul/date::day{31}},
@@ -368,7 +368,7 @@ TEST(yearly_by_dates_rule, every_year_on_these_days_from_next_year) {
    };
 
    {
-      auto r1 = rule3_t{
+      auto r1 = rule_t{
                   title_t{"Stand up every third day"},
                   yearly_t{1,
                      {date::jan/date::day{15}, date::mar/date::day{20}, date::jul/date::day{31}},
@@ -383,7 +383,7 @@ TEST(yearly_by_dates_rule, every_year_on_these_days_from_next_year) {
    }
 
    {
-      auto r1 = rule3_t{
+      auto r1 = rule_t{
                   title_t{"Stand up every third day"},
                   yearly_t{1,
                      {date::mar/date::day{20}, date::jul/date::day{31}, date::jan/date::day{15}}, // different order
@@ -398,7 +398,7 @@ TEST(yearly_by_dates_rule, every_year_on_these_days_from_next_year) {
    }
 
    {
-      auto r1 = rule3_t{
+      auto r1 = rule_t{
                   title_t{"Stand up every third day"},
                   yearly_t{1,
                      {date::jan/date::day{15}, date::mar/date::day{20}, date::jul/date::day{31}},
@@ -429,7 +429,7 @@ TEST(yearly_by_dates_rule, every_three_years_on_these_days_from_next_year) {
    };
 
    {
-      auto r1 = rule3_t{
+      auto r1 = rule_t{
                   title_t{"Stand up every third day"},
                   yearly_t{3,
                      {date::jan/date::day{15}, date::mar/date::day{20}, date::jul/date::day{31}},
@@ -444,7 +444,7 @@ TEST(yearly_by_dates_rule, every_three_years_on_these_days_from_next_year) {
    }
 
    {
-      auto r1 = rule3_t{
+      auto r1 = rule_t{
                   title_t{"Stand up every third day"},
                   yearly_t{3,
                      {date::mar/date::day{20}, date::jul/date::day{31}, date::jan/date::day{15}}, // different order
@@ -459,7 +459,7 @@ TEST(yearly_by_dates_rule, every_three_years_on_these_days_from_next_year) {
    }
 
    {
-      auto r1 = rule3_t{
+      auto r1 = rule_t{
                   title_t{"Stand up every third day"},
                   yearly_t{3,
                      {date::jan/date::day{15}, date::mar/date::day{20}, date::jul/date::day{31}},

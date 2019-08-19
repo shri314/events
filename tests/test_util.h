@@ -5,9 +5,9 @@
 #include <ostream>
 
 template<class Rule>
-std::vector<date::year_month_day> eval(const Rule& r, int limit, std::ostream* out = nullptr) {
+std::vector<date::year_month_day> eval(const Rule& rule, int limit, std::ostream* out = nullptr) {
    std::vector<date::year_month_day> got = { };
-   for(auto d : r.m_repeat) {
+   for(auto d : rule) {
       got.emplace_back(d);
       if(out)
          *out << d << "\n";

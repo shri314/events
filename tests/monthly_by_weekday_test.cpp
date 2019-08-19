@@ -16,7 +16,7 @@ TEST(monthly_by_weekday_rule, every_month_middle_day) {
    };
 
    {
-      auto r1 = rule4_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_weekday_t{1,
                      date::Sunday[3],
@@ -31,7 +31,7 @@ TEST(monthly_by_weekday_rule, every_month_middle_day) {
    }
 
    {
-      auto r1 = rule4_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_weekday_t{1,
                      date::Sunday[3],
@@ -46,7 +46,7 @@ TEST(monthly_by_weekday_rule, every_month_middle_day) {
    }
 
    {
-      auto r1 = rule4_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_weekday_t{1,
                      date::Sunday[3],
@@ -71,7 +71,7 @@ TEST(monthly_by_weekday_rule, every_three_months_middle_day) {
    };
 
    {
-      auto r1 = rule4_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_weekday_t{3,
                      date::Sunday[3],
@@ -86,7 +86,7 @@ TEST(monthly_by_weekday_rule, every_three_months_middle_day) {
    }
 
    {
-      auto r1 = rule4_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_weekday_t{3,
                      date::Sunday[3],
@@ -101,7 +101,7 @@ TEST(monthly_by_weekday_rule, every_three_months_middle_day) {
    }
 
    {
-      auto r1 = rule4_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_weekday_t{3,
                      date::Sunday[3],
@@ -126,7 +126,7 @@ TEST(monthly_by_weekday_rule, every_three_months_middle_day_from_next_month) {
    };
 
    {
-      auto r1 = rule4_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_weekday_t{3,
                      date::Sunday[3],
@@ -141,7 +141,7 @@ TEST(monthly_by_weekday_rule, every_three_months_middle_day_from_next_month) {
    }
 
    {
-      auto r1 = rule4_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_weekday_t{3,
                      date::Sunday[3],
@@ -156,7 +156,7 @@ TEST(monthly_by_weekday_rule, every_three_months_middle_day_from_next_month) {
    }
 
    {
-      auto r1 = rule4_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_weekday_t{3,
                      date::Sunday[3],

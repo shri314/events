@@ -31,7 +31,7 @@ int main() {
       };
 
       int limit = 10;
-      for(auto d : r1.m_repeat) {
+      for(auto d : r1) {
          std::cout << d << "\n";
          if(limit-- < 0)
             break;
@@ -43,7 +43,7 @@ int main() {
       std::cout << " Every other week on Mon, Tue from 2019-11-29, until 4 times \n";
       std::cout << "------------------------------------------------------------\n";
 
-      auto r1 = rule1_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   weekly_t{2,
                      {date::Monday, date::Tuesday},
@@ -55,7 +55,7 @@ int main() {
       };
 
       int limit = 10;
-      for(auto d : r1.m_repeat) {
+      for(auto d : r1) {
          std::cout << d << "\n";
          if(limit-- < 0)
             break;
@@ -67,7 +67,7 @@ int main() {
       std::cout << " Every other month on 2nd and 15th from 2019-11-29, until 4 times \n";
       std::cout << "------------------------------------------------------------\n";
 
-      auto r1 = rule2_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_dates_t{2,
                      {date::day{2}, date::day{15}},
@@ -79,7 +79,7 @@ int main() {
       };
 
       int limit = 10;
-      for(auto d : r1.m_repeat) {
+      for(auto d : r1) {
          std::cout << d << "\n";
          if(limit-- < 0)
             break;
@@ -91,7 +91,7 @@ int main() {
       std::cout << " Every other year on 26th Jan and 15th Aug from 2019-11-29, until 4 times \n";
       std::cout << "------------------------------------------------------------\n";
 
-      auto r1 = rule3_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   yearly_t{2,
                      {date::jan/date::day{26}, date::aug/date::day{15}},
@@ -103,7 +103,7 @@ int main() {
       };
 
       int limit = 10;
-      for(auto d : r1.m_repeat) {
+      for(auto d : r1) {
          std::cout << d << "\n";
          if(limit-- < 0)
             break;
@@ -115,7 +115,7 @@ int main() {
       std::cout << " Every other month on 1st friday from 2019-11-29, until 4 times \n";
       std::cout << "------------------------------------------------------------\n";
 
-      auto r1 = rule4_t{
+      auto r1 = rule_t{
                   title_t{"foo"},
                   monthly_by_weekday_t{2,
                      date::Friday[1],
@@ -127,7 +127,7 @@ int main() {
       };
 
       int limit = 10;
-      for(auto d : r1.m_repeat) {
+      for(auto d : r1) {
          std::cout << d << "\n";
          if(limit-- < 0)
             break;
