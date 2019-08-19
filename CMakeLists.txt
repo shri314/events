@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.5)
+cmake_minimum_required (VERSION 3.10.2)
 
 ###################################
 
@@ -20,7 +20,7 @@ ExternalProject_Add(
    URL_MD5 "54d9dd9d5ac32214d3cbe8cc80bbccf2"
    CMAKE_GENERATOR ${gen}
    CMAKE_ARGS
-      -DCMAKE_CXX_STANDARD:STRING=14
+      -DCMAKE_CXX_STANDARD:STRING=17
       -DBUILD_SHARED_LIBS:BOOL=ON
       -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_SOURCE_DIR}/3rdpty/date
 )
@@ -36,11 +36,13 @@ add_compile_options(-fPIC -std=c++17 -Wall -Wextra -Wno-unknown-pragmas -Werror 
 link_directories(
    ${CMAKE_SOURCE_DIR}/3rdpty/date/lib
    ${CMAKE_SOURCE_DIR}/3rdpty/gtest/lib
+   ${CMAKE_SOURCE_DIR}/3rdpty/json/lib
 )
 
 include_directories(
    ${CMAKE_SOURCE_DIR}/3rdpty/date/include
    ${CMAKE_SOURCE_DIR}/3rdpty/gtest/include
+   ${CMAKE_SOURCE_DIR}/3rdpty/json/include
    include
 )
 

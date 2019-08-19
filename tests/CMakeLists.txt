@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.5)
+cmake_minimum_required (VERSION 3.10.2)
 
 add_executable(daily_test main.cpp daily_test.cpp)
 target_link_libraries(daily_test gtest)
