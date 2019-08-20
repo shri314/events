@@ -9,19 +9,27 @@
 
 int main() {
 
-   parse_into_rule_t(
-      R"(
-         {
-            "title": "foo",
-            "frequency": {
-               "value": 2,
-               "unit": "days"
-            },
-            "begins": "2019-11-29",
-            "ends": "4"
-         }
-      )"_json
-   );
+   {
+      std::cout << "============================================================\n";
+      auto r1 = parse_into_rule_t(
+         R"(
+            {
+               "title": "foo",
+               "frequency": "2 days",
+               "begins": "2019-11-29",
+               "ends": "2019-12-05"
+            }
+         )"_json
+      );
+
+      int limit = 10;
+      for(auto d : r1) {
+         std::cout << d << "\n";
+         if(limit-- < 0)
+            break;
+      }
+      std::cout << "============================================================\n";
+   }
 
    // { "title": "Stand up", "frequency": "2 days",                        "begins": "2019-11-29", "ends": "never|date|4" },
    {
@@ -122,7 +130,7 @@ int main() {
       }
    }
 
-   // { "title": "Stand up", "frequency": "2 month", "on": "1 Fri",        "begins": "2019-11-29", "ends": "never|date|4" },
+   // { "title": "Stand up", "frequency": "2 month", "on_the": "1 Fri",    "begins": "2019-11-29", "ends": "never|date|4" },
    {
       std::cout << "------------------------------------------------------------\n";
       std::cout << " Every other month on 1st friday from 2019-11-29, until 4 times \n";

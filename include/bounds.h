@@ -10,8 +10,11 @@ struct never_t{ };
 /////////////////////
 
 struct bounds_t {
-   date::year_month_day m_begin;
-   std::variant< never_t, date::year_month_day, int > m_end;
+   using begin_t = date::year_month_day;
+   using end_t = std::variant< never_t, date::year_month_day, int >;
+
+   begin_t m_begin;
+   end_t m_end;
 };
 
 /////////////////////
