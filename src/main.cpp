@@ -58,6 +58,16 @@ int main() {
             "ends": "4"
          }
       )",
+
+      R"(
+         {
+            "title": "foo",
+            "frequency": "2 year",
+            "on": [ "26th Jan", "15th Aug" ],
+            "begins": "2019-11-29",
+            "ends": "never"
+         }
+      )",
    };
 
    for(std::string r : rules)
@@ -67,10 +77,16 @@ int main() {
       std::cout << "------------------------------------------------------------\n";
       auto r1 = parse_into_rule_t( nlohmann::json::parse(r) );
       int limit = 10;
+      bool break_out = false;
       for(auto d : r1) {
-         std::cout << d << "\n";
-         if(limit-- < 0)
+         if(break_out == true) {
+            std::cout << "..." << "\n";
             break;
+         }
+
+         std::cout << d << "\n";
+         if(--limit <= 0)
+            break_out = true;
       }
    }
 

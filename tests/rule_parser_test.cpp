@@ -129,3 +129,23 @@ TEST(parser, yearly_rule) {
 
    ASSERT_EQ( expected, eval(r1, 1000) );
 }
+
+
+TEST(parser, yearly_rule_infinite) {
+
+   auto r1 = parse_into_rule_t(
+      R"(
+         {
+            "title": "foo",
+            "frequency": "2 year",
+            "on": [ "26th Jan", "15th Aug" ],
+            "begins": "2019-11-29",
+            "ends": "never"
+         }
+      )"_json
+   );
+
+   ASSERT_EQ( 100u, eval(r1, 100).size() );
+   ASSERT_EQ( 1000u, eval(r1, 1000).size() );
+   ASSERT_EQ( 10000u, eval(r1, 10000).size() );
+}
