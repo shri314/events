@@ -89,9 +89,9 @@ rule_t parse_into_rule_t( nlohmann::json rule_json ) {
       return bounds_t::begin_t{ date::day(d) / date::month(m) / date::year(y) };
    };
 
-   auto&& extract_day_month = [](std::string day_month) {
+   auto&& extract_day_month = [](std::string s_day_month) {
 
-      std::istringstream iss{ day_month };
+      std::istringstream iss{ s_day_month };
       auto d = [&]() {
          std::string word;
          iss >> word;
@@ -119,6 +119,38 @@ rule_t parse_into_rule_t( nlohmann::json rule_json ) {
       return date::January / date::day{d};
    };
 
+   auto&& extract_weekday = [](std::string s_wd) {
+      detail::trim(s_wd);
+      s_wd = s_wd.substr(0, 3);
+      detail::to_lower_case(s_wd);
+
+      if(s_wd == "sun")      return date::Sunday;
+      else if(s_wd == "mon") return date::Monday;
+      else if(s_wd == "tue") return date::Tuesday;
+      else if(s_wd == "wed") return date::Wednesday;
+      else if(s_wd == "thu") return date::Thursday;
+      else if(s_wd == "fri") return date::Friday;
+      else if(s_wd == "sat") return date::Saturday;
+
+      throw std::runtime_error("bad weekday");
+   };
+
+   auto&& extract_weekday_indexed = [&extract_weekday](std::string s_weekday_indexed) {
+
+      std::istringstream iss{ s_weekday_indexed };
+
+      auto wdi = [&]() {
+         std::string word;
+         iss >> word;
+         return static_cast<unsigned>( stoi(word) );
+      }();
+
+      std::string wd;
+      iss >> wd;
+      
+      return extract_weekday(wd)[wdi];
+   };
+
    if( frequency_unit == "day" )
    {
       auto r1 = rule_t{
@@ -136,12 +168,43 @@ rule_t parse_into_rule_t( nlohmann::json rule_json ) {
    }
    else if( frequency_unit == "month" )
    {
-      auto&& on = rule_json["on"];
       auto&& on_the = rule_json["on_the"];
+      if(!on_the.is_null()) {
 
-      std::cout << "monthly_by_weekday_t or monthly_by_dates_t rule\n";
-      std::cout << "on_the = " << std::string(on_the) << "\n";
-      std::cout << "on = " << std::string(on) << "\n";
+         auto r1 = rule_t{
+                           title_t{title},
+                           monthly_by_weekday_t{
+                              frequency_value,
+                              extract_weekday_indexed( on_the ),
+                              bounds_t{
+                                 extract_begins(begins),
+                                 extract_ends(ends)
+                              }
+                           }
+         };
+
+         return r1;
+      }
+      else {
+         std::vector<date::day> on_dates;
+         for(auto e : rule_json["on"]) {
+            on_dates.emplace_back( std::stoi( std::string(e) ) );
+         }
+
+         auto r1 = rule_t{
+                           title_t{title},
+                           monthly_by_dates_t{
+                              frequency_value,
+                              on_dates,
+                              bounds_t{
+                                 extract_begins(begins),
+                                 extract_ends(ends)
+                              }
+                           }
+         };
+
+         return r1;
+      }
    }
    else if( frequency_unit == "year" )
    {
@@ -174,18 +237,7 @@ rule_t parse_into_rule_t( nlohmann::json rule_json ) {
 
       std::vector<date::weekday> on_days;
       for(auto e : on) {
-         std::string day = e;
-         detail::trim(day);
-         day = day.substr(0, 3);
-         detail::to_lower_case(day);
-
-         if(day == "sun") on_days.emplace_back( date::Sunday );
-         else if(day == "mon") on_days.emplace_back( date::Monday );
-         else if(day == "tue") on_days.emplace_back( date::Tuesday );
-         else if(day == "wed") on_days.emplace_back( date::Wednesday );
-         else if(day == "thu") on_days.emplace_back( date::Thursday );
-         else if(day == "fri") on_days.emplace_back( date::Friday );
-         else if(day == "sat") on_days.emplace_back( date::Saturday );
+         on_days.emplace_back( extract_weekday( e ) );
       }
 
       auto r1 = rule_t{
