@@ -135,22 +135,6 @@ rule_t parse_into_rule_t( nlohmann::json rule_json ) {
       throw std::runtime_error("bad weekday");
    };
 
-   auto&& extract_weekday_indexed = [&extract_weekday](std::string s_weekday_indexed) {
-
-      std::istringstream iss{ s_weekday_indexed };
-
-      auto wdi = [&]() {
-         std::string word;
-         iss >> word;
-         return static_cast<unsigned>( stoi(word) );
-      }();
-
-      std::string wd;
-      iss >> wd;
-      
-      return extract_weekday(wd)[wdi];
-   };
-
    if( frequency_unit == "day" )
    {
       auto r1 = rule_t{
@@ -168,14 +152,20 @@ rule_t parse_into_rule_t( nlohmann::json rule_json ) {
    }
    else if( frequency_unit == "month" )
    {
-      auto&& on_the = rule_json["on_the"];
-      if(!on_the.is_null()) {
+      auto&& on_day = rule_json["on_day"];
+      if(!on_day.is_null()) {
+
+         std::vector<unsigned> on_indexes;
+         for(auto e : rule_json["on"]) {
+            on_indexes.emplace_back( std::stoi(std::string(e)) );
+         }
 
          auto r1 = rule_t{
                            title_t{title},
                            monthly_by_weekday_t{
                               frequency_value,
-                              extract_weekday_indexed( on_the ),
+                              extract_weekday(on_day),
+                              on_indexes,
                               bounds_t{
                                  extract_begins(begins),
                                  extract_ends(ends)

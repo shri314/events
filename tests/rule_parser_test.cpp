@@ -85,9 +85,9 @@ TEST(parser, monthly_by_weekday_t) {
 
    const std::vector<date::year_month_day> expected = {
       date::day(6)/date::dec/date::year(2019),
+      date::day(20)/date::dec/date::year(2019),
       date::day(7)/date::feb/date::year(2020),
-      date::day(3)/date::apr/date::year(2020),
-      date::day(5)/date::jun/date::year(2020),
+      date::day(21)/date::feb/date::year(2020),
    };
 
    auto r1 = parse_into_rule_t(
@@ -95,7 +95,8 @@ TEST(parser, monthly_by_weekday_t) {
          {
             "title": "foo",
             "frequency": "2 months",
-            "on_the": "1st Fri",
+            "on": [ "1st", "3rd" ],
+            "on_day": "Fri",
             "begins": "2019-11-29",
             "ends": "4"
          }

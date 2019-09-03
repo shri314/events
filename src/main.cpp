@@ -43,7 +43,8 @@ int main() {
          {
             "title": "foo",
             "frequency": "2 months",
-            "on_the": "1st Fri",
+            "on": [ "1st", "3rd" ],
+            "on_day": "Fri",
             "begins": "2019-11-29",
             "ends": "4"
          }
